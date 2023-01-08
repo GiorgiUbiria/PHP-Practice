@@ -82,7 +82,7 @@
             return $this->type;
         }
 
-        abstract public function getMass();
+        abstract public function getWeight();
         abstract public function getSize();
         abstract public function getHeight();
         abstract public function getWidth();
@@ -91,10 +91,11 @@
 
     /**
      * Class representing a book in the database.
-     */ class Book extends Product
+     */
+    class Book extends Product
     {
         // Properties
-        protected $mass;
+        protected $weight;
 
         /**
          * Constructor for a book.
@@ -102,15 +103,15 @@
          * @param string $sku The SKU of the book.
          * @param string $name The name of the book.
          * @param float $price The price of the book.
-         * @param int $mass The mass of the book.
+         * @param int $weight The weight of the book.
          */
-        public function __construct(string $sku, string $name, float $price, int $mass)
+        public function __construct(string $sku, string $name, float $price, int $weight)
         {
             // Call the parent constructor to set the shared properties
             parent::__construct($sku, $name, $price, 'Book');
 
             // Set the book-specific property
-            $this->mass = $mass;
+            $this->weight = $weight;
         }
 
         /**
@@ -130,12 +131,12 @@
          */
         public function getAdditionalProperties()
         {
-            return "Mass: " . $this->mass . " Kg";
+            return "Weight: " . $this->weight . " Kg";
         }
 
-        public function getMass(): int
+        public function getWeight(): int
         {
-            return $this->mass;
+            return $this->weight;
         }
 
         public function getSize(): int
@@ -168,12 +169,12 @@
         protected $size;
 
         /**
-         * Constructor for a book.
+         * Constructor for a DVD.
          *
-         * @param string $sku The SKU of the book.
-         * @param string $name The name of the book.
-         * @param float $price The price of the book.
-         * @param int $size The mass of the book.
+         * @param string $sku The SKU of the DVD.
+         * @param string $name The name of the DVD.
+         * @param float $price The price of the DVD.
+         * @param int $size The size of the DVD.
          */
         public function __construct(string $sku, string $name, float $price, int $size)
         {
@@ -204,7 +205,7 @@
             return "Size: " . $this->size . " MB";
         }
 
-        public function getMass(): int
+        public function getWeight(): int
         {
             return 0;
         }
@@ -281,7 +282,7 @@
             return "Dimensions: " . $this->height . "x" . $this->width . "x" . $this->length;
         }
 
-        public function getMass(): int
+        public function getWeight(): int
         {
             return 0;
         }
@@ -400,7 +401,7 @@
 
             switch ($type) {
                 case 'Book':
-                    $mass = $product->getMass();
+                    $mass = $product->getWeight();
                     $query = "INSERT INTO products_list (SKU, product_name, product_price, product_type, product_mass, product_height, product_length, product_width, product_size) VALUES (?, ?, ?, 'Book', ?, NULL, NULL, NULL, NULL)";
                     break;
                 case 'DVD':
@@ -425,7 +426,7 @@
                     $statement->bind_param('ssdi', $sku, $name, $price, $size);
                     break;
                 case 'Furniture':
-                    $statement->bind_param('ssdii', $sku, $name, $price, $height, $length, $width);
+                    $statement->bind_param('ssdiii', $sku, $name, $price, $height, $length, $width);
                     break;
             }
 

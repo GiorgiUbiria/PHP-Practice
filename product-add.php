@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     switch ($type) {
         case 'Book':
-            $mass = (int) $_POST['weight'];
+            $weight = (int) $_POST['weight'];
             // Set the properties of the Product object
-            $product = new Book($sku, $name, $price, $mass);
+            $product = new Book($sku, $name, $price, $weight);
             break;
         case 'DVD':
             $size = (int) $_POST['size'];

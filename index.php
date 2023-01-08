@@ -17,23 +17,58 @@ $products = $database->getProducts();
 <head>
     <title>Product List</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin: 0 1rem 1rem 0;
+        }
+
+        .button {
+            border: 1px solid black;
+            border-radius: 2px;
+            outline: none;
+            background-color: white;
+            width: 120px;
+            height: 50px;
+            color: black;
+        }
+
         .card-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            background-color: lightgray;
+            background-color: white;
             padding: 20px;
         }
 
         .card {
-            width: calc(25% - 20px);
-            height: 300px;
+            width: calc(25% - 150px);
+            height: 200px;
             margin: 10px;
             background-color: white;
             border: 1px solid black;
             box-sizing: border-box;
             padding: 20px;
             font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .card-title {
@@ -51,14 +86,26 @@ $products = $database->getProducts();
             font-weight: bold;
             color: green;
         }
+
+        .delete-checkbox {
+            align-self: flex-end;
+        }
     </style>
 </head>
 
 <body>
-    <form action="/add-product.php">
-        <button type="submit">ADD</button>
-    </form>
-    <button type="button" id="delete-product-btn">MASS DELETE</button>
+    <h1> Products List </h1>
+
+    
+    <div class="buttons">
+        <form action="/add-product.php">
+            <button class="button" type="submit">ADD</button>
+        </form>
+        <button type="button" id="delete-product-btn" class="button">MASS DELETE</button>
+    </div>
+    
+    <hr style="background-color: black; height: 3px; width: 100%; outline: none; border: none; margin-bottom: 1rem;">
+
     <div class="card-grid">
         <?php foreach ($products as $product) : ?>
             <div class="card">
